@@ -2,11 +2,35 @@ Rss filter
 ==========
 A command-line tool to download/filter/export RSS/ATOM feeds.
 
+## Overview
+The author uses the the default configuration of the rss-filter (see config.java-backend.yml the file is self-explaining) to search for remote programming jobs (in the Java backend area).
+However, the tool can be used for anything else.
+The rss-filter can download RSS/ATOM feeds and filter them based on fulltext search queries (implemented with Lucene).
+This means: in case the information you need exists in form of RSS/ATOM feeds - than you can use the rss-filter as an RSS aggregator with your own set of (very flexible) filters.
+The tool writes the *.atom files - you can open them in your favorite RSS reader (author uses Liferea).
+
+## Prerequisites
+* Java 1.7 or higher
+* Maven 3 or higher
+* Terminal
+
+To check the prerequisites:
+`
+$ mvn --version
+Apache Maven 3.0.4
+
+$ java -version
+java version "1.7.0_07
+`
+ 
 ## Build
 In the terminal run:
+`
     mvn package
+`
 
 ## Use
+`
  usage: rss-filter [-c <file>] [-h] [-q] [-v] <command> [command2] [command3] ... [commandN]
 
  Commands:
@@ -23,4 +47,5 @@ In the terminal run:
 
  Example:
  java -jar target/rss-filter-1.0-SNAPSHOT.jar -v -c config.java-backend.yml get tag export 
+`
 
