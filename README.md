@@ -52,5 +52,5 @@ In the terminal run: `  mvn package  `
 ## Credits
 The sources (the job boards) in the config.yml are taken from these great projects:
   
-  https://github.com/lukasz-madon/awesome-remote-job/
-  https://github.com/hugo53/awesome-RemoteWork#hiring-sites
+*  https://github.com/lukasz-madon/awesome-remote-job/
+*  https://github.com/hugo53/awesome-RemoteWork#hiring-sites
