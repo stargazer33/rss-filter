@@ -27,16 +27,14 @@ java version "1.7.0_07
 
  
 ## Build
-In the terminal run:
-
+In the terminal run: 
 `
     mvn package
 `
 
 ## Use
 
-`
- java -jar target/rss-filter-1.0-SNAPSHOT.jar [-c <file>] [-h] [-q] [-v] <command> [command2] [command3] ... [commandN]
+` java -jar target/rss-filter-1.0-SNAPSHOT.jar [-c <file>] [-h] [-q] [-v] <command> [command2] [command3] ... [commandN]
 
  Commands:
  get		Iterates over all configured data sources and retrieves the data (usually the RSS feeds)
@@ -51,7 +49,5 @@ In the terminal run:
  -v          logging: be extra verbose
 
  Example:
- java -jar target/rss-filter-1.0-SNAPSHOT.jar -v -c config.java-backend.yml get tag export 
-`
-
+ java -jar target/rss-filter-1.0-SNAPSHOT.jar -v -c config.java-backend.yml get tag export `
 
