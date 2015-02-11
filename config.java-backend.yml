@@ -1,0 +1,138 @@
+# rss-filter configuration file explained:
+#
+# General file syntax: YAML, see http://en.wikipedia.org/wiki/YAML
+#
+# The file contains 3 lists:
+#   sources 
+#   taggers
+#   exportFiles
+#
+# Entries in "sources" list corresponds to Java classes in 
+#   org.dfotos.rssfilter.src and org.dfotos.rssfilter.src.custom
+#   The "srcrss" (See SrcRss.java) represents an RSS/ATOM feed. Just specify a valid URL of the feed
+#   The "Custom" sources: they are using site-specific API or scraping.
+#   At the moment there are two "custom" sources: 
+#      "workinstartups.com" (See SrcWorkinstartups.java)
+#      "jobs.remotive.io" (See SrcJobsRemotiveIo.java)
+#
+# Entries in "taggers" list represent so-called "taggers"
+#   At the moment a only one tagger exist: "lucenetagger".
+#   The "lucenetagger" performs the Lucene query (see "query" property) and attaches the tag (as in tagName) to every result of the query
+#   The Lucene query syntax description can be found here: 
+#	https://lucene.apache.org/core/4_10_3/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description
+#   Note: all lucene "documents" in index contains 3 fields:
+#	title - corresponds to <title> in RSS format
+#	description - corresponds to <description> in RSS format
+#	all - title+description combined. this is the default field
+#
+# Entries in "exportFiles" represent the output (usually the output file)
+#   The "exportfile" filters the entries and writes them into corresponding <name>.atom file
+#   Filtering 
+#	
+#
+#
+!config
+
+sources: 
+- !org.dfotos.rssfilter.src.custom.SrcJobsRemotiveIo
+   name: jobs.remotive.io
+   url: http://jobs.remotive.io/
+- !srcrss
+   name: remoteworkhunt.com
+   url: http://www.remoteworkhunt.com/feed
+
+taggers: 
+- !lucenetagger
+   docPart: td
+   tagName: remote
+   query: "title:(remote OR anywhere OR \"from home\"~1 OR \"work at home\"~1 OR \"home based\"~1 OR telecommute OR online OR \"co-location\"~1 OR \"International\"~1 )"
+
+- !lucenetagger
+   tagName: remote
+   query: "description:( \"full remote\"~1 OR \"fully remote\"~1 OR \"full-time remote\"~1 OR \"remote anywhere\"~1 OR \"Work from home\"~1 OR \"remote only\"~1 OR \"International Okay\"~3 OR \"International contractor\"~5 ) "
+
+- !lucenetagger
+   tagName: java
+   query: "description:( \"java API\" OR \"java skills\"~1 OR \"core java\"~1 OR \"excellent java\"~1 )"
+
+- !lucenetagger
+   tagName: java
+   query: "description:( JVM OR dropwizard OR lucene OR SpringMVC OR JMS OR JPA OR Hibernate OR Maven OR Struts OR RMI OR Servlet OR playframework OR tomcat OR jetty OR Weblogic OR JBoss OR Wildfire )"
+
+- !lucenetagger
+   tagName: java
+   query: "title:java"
+
+- !lucenetagger
+   tagName: java-backend
+   query: "( \"server-side\"~1 OR \"data engineer\"~1 OR \"backend engineer\"~1 OR \"Backend Developer\"~1 OR  \"Backend Development\"~1 OR \"java backend\"~1 OR \"java server\"~1 OR \"high availability\"~1 OR \"highly available\"~ OR \"high available\"~1 OR \"high performance\"~1 OR \"highly transactional\"~1 OR \"distributed systems\"~1 OR \"distributed system\"~1 OR \"data structures\"~1 OR \"database design\"~1 OR \"high throughput\" )"
+
+- !lucenetagger
+   tagName: java-senior
+   query: "title:( \"java senior\"~1 OR \"Senior Software Engineer\"~1 OR \"Senior Engineer\"~1 OR \"Senior Java Engineer\"~1 OR \"Senior developer\"~1 OR \"Senior java developer\"~1 OR architect OR Principal OR lead )"
+
+- !lucenetagger
+   tagName: residents-only
+   query: "title:(\"US/Canada Residents Only\"~1 OR \"Residents Only\"~1 OR \"citizens only\"~1 )"
+
+- !lucenetagger
+   tagName: bad-tech
+   query: "title:( C# OR .NET OR Drupal OR javascript OR jQuery OR frontend OR angularjs OR emberjs OR grails OR mobile OR android OR iOS OR PHP OR Flash OR Ruby OR RubyOnRails OR Rails )"
+
+- !lucenetagger
+   tagName: bad-jobtitle
+   query: "title:( Junior OR Internship )"
+
+   #query: "\"remote work\"~1"
+   #OR \"\"~1
+
+#- !wordlisttagger
+#   docPart: t
+#   tagName: java
+#   worldList: 
+#   - java
+#   - hibernate
+#   - spring
+#   - maven
+#   - core java
+#   - junit
+#   - jdbc
+#- !wordlisttagger
+#   docPart: d
+#   tagName: java
+#   worldList: 
+#   - hibernate
+#   - maven
+#   - core java
+#   - junit
+#   - jdbc
+#- !wordlisttagger
+#   docPart: t
+#   tagName: remote
+#   worldList: 
+#   - remote
+#   - Remote
+#   - REMOTE
+#   - Anywhere
+#   - anywhere
+
+exportFiles: 
+
+- !exportfile
+   name: java-backend
+   tagsNOT:
+   - bad-tech
+   - residents-only
+   - bad-jobtitle
+   tagsAND:
+   - java-backend
+
+- !exportfile
+   name: java-remote
+   tagsNOT:
+   - bad-tech
+   - residents-only
+   - bad-jobtitle
+   tagsAND:
+   - java
+    
