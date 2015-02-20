@@ -8,7 +8,7 @@ The author uses the the default configuration of the rss-filter (see `config.jav
 However, the tool can be used for anything else. The rss-filter can download RSS/ATOM feeds and filter them based on fulltext search queries (implemented with Lucene).
 
 This means: in case the information you need exists in form of RSS/ATOM feeds - you can use the rss-filter as an RSS aggregator with your own set of (very flexible) filters.
-The tool ouptuts the *.atom files - you can browse them in your favorite RSS reader (author uses Liferea).
+The tool outputs the *.atom files - you can browse them in your favorite RSS reader (author uses Liferea).
 
 ## Prerequisites
 * Java 1.7 or higher
@@ -46,7 +46,7 @@ In the terminal run: `  mvn package  `
  -v          logging: be extra verbose
 
  Example:
- java -jar target/rss-filter-1.0-SNAPSHOT.jar -v -c config.java-backend.yml get tag export 
+ java -jar target/rss-filter-1.0-SNAPSHOT.jar -c config.java-backend.yml get tag export 
 ```
 
 ## Credits

@@ -118,7 +118,7 @@ public class ExportFile {
 			Utils.writeItemsToAtomFile(
 				toExport, 
 				name, //"title", 
-				"", 
+				"file:///"+fileName, 
 				getDescription(), 
 				fileName
 			);

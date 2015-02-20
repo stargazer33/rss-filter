@@ -31,15 +31,15 @@ extends SrcBase
 	throws Exception
 	{
     	log.log( Level.FINE, "begin");
+    	
 		List<RssItem> result=new ArrayList<RssItem> (50);
-		
-		log.log( Level.INFO, "reading "+url+" ..." );
+		log.log( Level.INFO, "{0}, reading...", new Object[]{ getName() } );
 		URL feedUrl = new URL( url );
 		SyndFeedInput input = new SyndFeedInput();
-		input.setPreserveWireFeed(true);
         SyndFeed feed = input.build(new XmlReader(feedUrl));
-    	log.log( Level.FINE, ""+feed.getEntries().size() + " RSS/ATOM items read");
+    	log.log( Level.INFO, "{0}, {1} RSS/ATOM items read",  new Object[]{ getName(), feed.getEntries().size() } );
         
+    	int numNoDescr=0;
         for (Object obj : feed.getEntries()) {
         	SyndEntryImpl src=(SyndEntryImpl)obj;
         	RssItem trg = new RssItem();
@@ -49,7 +49,7 @@ extends SrcBase
         	trg.setTitle( src.getTitleEx().getValue() );
         	
         	if( null==src.getDescription() || null==src.getDescription().getValue() ){
-        		log.log(Level.SEVERE, getName()+" missing item description");
+        		numNoDescr++;
         	}
         	else{
             	trg.setDescription( src.getDescription().getValue() );
@@ -60,6 +60,10 @@ extends SrcBase
         	trg.setPublished( src.getPublishedDate() );
         	trg.setSource(name);
 		}
+        
+        if( numNoDescr>0 ){
+        	log.log( Level.INFO, "{0}, number of items without description: {1}",  new Object[]{ getName(), numNoDescr } );
+        }
         
     	log.log( Level.FINE, "end");
 		return result;

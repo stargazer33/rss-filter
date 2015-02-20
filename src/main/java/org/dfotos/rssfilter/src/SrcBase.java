@@ -30,7 +30,7 @@ implements SrcIntf {
 	public String doHttpGet() 
 	throws IOException 
 	{
-		log.log( Level.INFO, "reading "+url+" ..." );
+		log.log( Level.INFO, "{0}, reading...", new Object[]{ getName() } );
 		
 		if (client==null){
 			client = new OkHttpClient();
@@ -51,7 +51,7 @@ implements SrcIntf {
 		}
 		
 		String tmp=response.body().string();
-    	log.log( Level.FINE, ""+tmp.length() + " bytes read");
+		log.log( Level.FINE, "{0}, {1} bytes read", new Object[]{ getName(), tmp.length() } );
 		return tmp;
 	}
 	

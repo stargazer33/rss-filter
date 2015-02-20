@@ -34,10 +34,10 @@
 !config
 
 sources: 
-- !srcrss
+#- !srcrss
    # this site is in Russian. you can comment out it
-   name: dou.ua 
-   url: http://jobs.dou.ua/vacancies/feeds/?cities=%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%B0
+   # name: dou.ua 
+   # url: http://jobs.dou.ua/vacancies/feeds/?cities=%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%B0
 - !srcrss
    name: weworkremotely.com
    url: https://weworkremotely.com/categories/2/jobs.rss
@@ -83,18 +83,18 @@ sources:
 - !srcrss
    name: simplyhired.com-3
    url: http://www.simplyhired.com/a/job-feed/rss/qa-Java/fjt-telecommute/fcz-3
-- !srcrss 
-   name: simplyhired.com-2
-   url: http://www.simplyhired.com/a/job-feed/rss/qa-Java/fjt-telecommute/fcz-2
-- !srcrss
-   name: simplyhired.com-1
-   url: http://www.simplyhired.com/a/job-feed/rss/qa-Java/fjt-telecommute/fcz-1
+#- !srcrss 
+#   name: simplyhired.com-2
+#   url: http://www.simplyhired.com/a/job-feed/rss/qa-Java/fjt-telecommute/fcz-2
+#- !srcrss
+#   name: simplyhired.com-1
+#   url: http://www.simplyhired.com/a/job-feed/rss/qa-Java/fjt-telecommute/fcz-1
 - !srcrss
    name: nomadjobs.io
    url: http://nomadjobs.io/remote-jobs.rss
-- !srcrss
-   name: virtualvocations.com
-   url: http://www.virtualvocations.com/jobs/q-telecommuting+java+jobs/rss
+#- !srcrss
+#   name: virtualvocations.com
+#   url: http://www.virtualvocations.com/jobs/q-telecommuting+java+jobs/rss
 - !srcrss
    name: remotecoder.io
    url: http://feedpress.me/remotecoder
@@ -151,7 +151,7 @@ taggers:
 
 - !lucenetagger
    tagName: bad-tech
-   query: "title:( C# OR .NET OR Drupal OR javascript OR jQuery OR frontend OR angularjs OR emberjs OR grails OR mobile OR android OR iOS OR PHP OR Flash OR Ruby OR RubyOnRails OR Rails )"
+   query: "title:( C# OR .NET OR Drupal OR javascript OR jQuery OR frontend OR angularjs OR emberjs OR grails OR mobile OR android OR iOS OR PHP OR Flash OR Ruby OR RubyOnRails OR Rails OR \"java front end\" OR \"java frontend\" OR \"in test\" OR \"Front-End Development\" OR \"Front-End Developer\" )"
 
 - !lucenetagger
    tagName: bad-jobtitle

@@ -43,7 +43,7 @@ extends SrcBase
 			tmp.substring( 11, tmp.length() ), // cut the garbage in the first 11 chars! 
 			new TypeToken<List<JsonItem>>(){}.getType() //provide the type info, JsonItem will be instantiated 
 		);
-    	log.log( Level.FINE, ""+listPojo.size() + " JSON items read");
+    	log.log( Level.INFO, "{0}, {1} JSON items read", new Object[]{ getName(), listPojo.size()});
 		
 		//copy JsonItem -> RssItem
 		for (Object obj : listPojo) {

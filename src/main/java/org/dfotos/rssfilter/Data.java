@@ -272,7 +272,7 @@ public class Data {
 		@SuppressWarnings("unchecked")
 		List<RssItem> result = (List<RssItem>) reader.read();		
 		
-    	log.log( Level.INFO, "done");
+    	log.log( Level.INFO, "{0} items read from {1}", new Object[]{ result.size(), fileName,} );
 		return result;
 	}	
 	
@@ -307,7 +307,7 @@ public class Data {
 		
 		//data initialized and not changed
 		setAllDataChanged(false);
-		log.log( Level.FINE, "begin");
+		log.log( Level.FINE, "end");
 	}
 	
 	/*********************************************************************/

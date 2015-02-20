@@ -69,11 +69,11 @@ public class LuceneTagger extends Tagger {
 		queryParser = new QueryParser( "all", an);
 		
 		Query q = queryParser.parse(query);
-		log.log( Level.FINE, "tagName: "+getTagName()+", text_query: "+query+", Lucene_query: "+q.getClass().getSimpleName()+ ", " + q.toString() );
+		log.log( Level.FINE, "tagName: "+getTagName()+",\ntext_query: "+query+",\nLucene_query: "+q.getClass().getSimpleName()+ ", " + q.toString() );
 		
 		//now search and iterate through search results (Lucene documents)
 		TopDocs docsFound = searcher.search(q, Integer.MAX_VALUE);
-		log.log( Level.FINE, "Found: "+docsFound.scoreDocs.length+ " items" );		
+		log.log( Level.FINE, "tagName: "+getTagName()+", Items found: "+docsFound.scoreDocs.length );		
 		
 		for ( ScoreDoc scoreDoc : docsFound.scoreDocs ) {
 			//we need only the "id" field in the Lucene Document, we ignore other fields

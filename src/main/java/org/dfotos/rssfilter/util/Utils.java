@@ -187,6 +187,7 @@ public class Utils {
         	entry = new SyndEntryImpl();
         	description = new SyndContentImpl();
         	entry.setDescription(description);
+        	entry.setAuthor( rssItem.getSource() );
         	entry.setPublishedDate( rssItem.getPublished() );
         	entry.setTitle( rssItem.getTitle() );
         	entry.setLink(  rssItem.getUrl() );
