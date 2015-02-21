@@ -1,0 +1,114 @@
+# Ruby on Rails remote job search
+#
+!config
+
+sources: 
+#- !srcrss
+   # this site is in Russian. you can comment out it
+   # name: dou.ua 
+   # url: http://jobs.dou.ua/vacancies/feeds/?cities=%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%B0
+- !srcrss
+   name: weworkremotely.com
+   url: https://weworkremotely.com/categories/2/jobs.rss
+- !srcrss
+   name: stackoverflow.com
+   url: http://careers.stackoverflow.com/jobs/feed?allowsremote=True
+- !org.dfotos.rssfilter.src.custom.SrcWorkinstartups
+   name: workinstartups.com
+   url: http://workinstartups.com/job-board/api/api.php?action=getJobs&type=0&category=programmers&count=999&random=0&days_behind=60&response=json&city=0
+- !srcrss
+   name: jobmote
+   url: http://jobmote.com/feed.rss
+- !srcrss
+   name: authenticjobs.com
+   url: http://www.authenticjobs.com/rss/custom.php?terms=&type=1,3,5,2,6&cats=&onlyremote=1&location=
+- !srcrss
+   name: indeed.com-1
+   url: http://rss.indeed.com/rss?q=rails
+- !srcrss
+   name: indeed.com-2
+   url: http://rss.indeed.com/rss?q=rails&l=Remote 
+- !srcrss
+   name: indeed.co.uk-1
+   url: http://www.indeed.co.uk/rss?q=rails
+- !srcrss
+   name: indeed.co.uk-2
+   url: http://www.indeed.co.uk/rss?q=rails&l=remote&radius=100
+- !srcrss
+   name: itflow.biz
+   url: http://itflow.biz/?feed=job_feed&type=contract,freelance,full-time,part-time,temporary&location&job_categories&s&job_region=2430
+- !srcrss
+   name: smashingmagazine.com
+   url: http://jobs.smashingmagazine.com/rss/all/programming
+- !srcrss
+   name: wfh.io
+   url: https://www.wfh.io/categories/1/jobs.atom
+- !srcrss
+   name: jobs.github.com-1
+   url: https://jobs.github.com/positions.atom?description=remote&location=
+- !srcrss
+   name: jobs.github.com-2
+   url: https://jobs.github.com/positions.atom?description=anywhere&location=
+- !srcrss
+   name: simplyhired.com-3
+   url: http://www.simplyhired.com/a/job-feed/rss/q-rails/
+- !srcrss
+   name: nomadjobs.io
+   url: http://nomadjobs.io/remote-jobs.rss
+- !srcrss
+   name: remotecoder.io
+   url: http://feedpress.me/remotecoder
+- !srcrss
+   # this kimono scraper does not work as it should
+   name: jobsremotely.com-kimono
+   url: https://www.kimonolabs.com/api/rss/2uucfbi2?apikey=PpdWi07uouYSAwDY0VfPpFnFypG6W0ry
+- !srcrss
+   # this kimono scraper does not work as it should
+   name: remotehackers.com-kimono
+   url: https://www.kimonolabs.com/api/rss/a8n56jsq?apikey=PpdWi07uouYSAwDY0VfPpFnFypG6W0ry
+- !org.dfotos.rssfilter.src.custom.SrcJobsRemotiveIo
+   name: jobs.remotive.io
+   url: http://jobs.remotive.io/
+- !srcrss
+   name: remoteworkhunt.com
+   url: http://www.remoteworkhunt.com/feed
+
+taggers: 
+- !lucenetagger
+   docPart: td
+   tagName: remote
+   query: "title:(remote OR anywhere OR \"from home\"~1 OR \"work at home\"~1 OR \"home based\"~1 OR telecommute OR online OR \"co-location\"~1 OR \"International\"~1 )"
+
+- !lucenetagger
+   tagName: remote
+   query: "description:( \"full remote\"~1 OR \"fully remote\"~1 OR \"full-time remote\"~1 OR \"remote anywhere\"~1 OR \"Work from home\"~1 OR \"remote only\"~1 OR \"International Okay\"~3 OR \"International contractor\"~5 ) "
+
+- !lucenetagger
+   tagName: ror
+   query: "( Ruby OR \"Ruby on Rails\" OR rails )"
+
+- !lucenetagger
+   tagName: residents-only
+   query: "title:(\"US/Canada Residents Only\"~1 OR \"Residents Only\"~1 OR \"citizens only\"~1 )"
+
+- !lucenetagger
+   tagName: bad-tech
+   query: "title:( c++ OR Java OR C# OR .NET OR Drupal OR grails OR mobile OR android OR iOS OR PHP OR Flash OR \"java front end\" OR \"java frontend\" OR \"in test\" )"
+
+- !lucenetagger
+   tagName: bad-jobtitle
+   query: "title:( Junior OR Internship )"
+
+
+exportFiles: 
+- !exportfile
+   name: ruby-on-rails
+   tagsNOT:
+   - bad-tech
+   - residents-only
+   - bad-jobtitle
+   tagsAND:
+   - ror
+   - remote
+
+    
