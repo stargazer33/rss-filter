@@ -28,15 +28,15 @@ public class DataTest extends TestCase {
     public void test1() 
     throws IOException
     {
-        System.out.println("test1");
         assertTrue( data.getAllItems().size()==0 );
+        assertTrue( data.isAllItemsInitialized() );
+        assertFalse( data.isAllDataChanged() );
     }
 
     
     public void test2() 
     throws Exception
     {
-        System.out.println("test2");
         assertTrue( data.isAllItemsInitialized() );
         assertFalse( data.isAllDataChanged() );
         
