@@ -3,6 +3,7 @@ package org.dfotos.rssfilter.tag;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.dfotos.rssfilter.Data;
 import org.dfotos.rssfilter.RssItem;
 
 /**
@@ -14,8 +15,13 @@ public abstract class Tagger {
 	/**
 	 * The tag to attach
 	 */
-	String tagName=new String();
+	private String tagName=new String();
 
+	/**
+	 * the Data to operate on
+	 */
+	private Data data=null;
+	
 	/**
 	 * which part of the RssItem this tagger checks?
 	 * 
@@ -60,7 +66,13 @@ public abstract class Tagger {
 		this.tagName = tagName;
 	}
 	
+	public Data getData() {
+		return data;
+	}
 
+	public void setData(Data data) {
+		this.data = data;
+	}
 	
 	/**
 	 * Assign tags

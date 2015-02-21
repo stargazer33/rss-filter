@@ -308,7 +308,7 @@ public class Data {
 		for (RssItem rssItem : tmpItems) {
 			addItem( rssItem );
 		}
-		App.getData().commitItems(); //now commit all the changes
+		commitItems(); //now commit all the changes
 		
 		initLuceneSearcher();
 		

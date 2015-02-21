@@ -14,7 +14,6 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.dfotos.rssfilter.App;
 import org.dfotos.rssfilter.RssItem;
 
 
@@ -57,8 +56,8 @@ public class LuceneTagger extends Tagger {
 	throws Exception
 	{
 
-		Map<Long, RssItem> idMap= App.getData().getAllItemsIdMap();
-		IndexSearcher searcher = App.getData().getLuceneIndexSearcher();
+		Map<Long, RssItem> idMap= getData().getAllItemsIdMap();
+		IndexSearcher searcher = getData().getLuceneIndexSearcher();
 	
 		Analyzer an=new StandardAnalyzer();
 		QueryParser queryParser = null;
@@ -85,7 +84,7 @@ public class LuceneTagger extends Tagger {
 		    
 		    //attach the tag
 			rssItem.getTags().add(getTagName());
-			App.getData().setAllDataChanged(true);
+			getData().setAllDataChanged(true);
 		}
 	}
 

@@ -26,6 +26,7 @@ implements CommandIntf
 		
 		List<Tagger> allTaggers= App.getConfig().getTaggers();
 		for (Tagger tagger : allTaggers) {
+			tagger.setData( App.getData() );
 			tagger.assignTags();
 		}
 		
