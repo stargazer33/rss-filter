@@ -2,6 +2,8 @@ Rss filter
 ==========
 A command-line tool to download/filter/export RSS/ATOM feeds.
 
+It is still an early DRAFT. [You can suggest suggest improvements here](https://github.com/stargazer33/rss-filter/issues)
+
 ## Overview
 The author uses the the default configuration of the rss-filter (see `config.java-backend.yml`, the file is self-explaining) to search for remote programming jobs (in the Java backend area).
 

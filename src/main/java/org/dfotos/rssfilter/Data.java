@@ -1,5 +1,6 @@
 package org.dfotos.rssfilter;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -295,7 +296,13 @@ public class Data {
 	throws IOException
 	{
 		log.log( Level.FINE, "begin");
-		List<RssItem> tmpItems=readFromYamlFile("all-items.yml");
+		List<RssItem> tmpItems=new ArrayList<RssItem>();
+		try{
+			tmpItems=readFromYamlFile("all-items.yml");
+		}
+		catch(FileNotFoundException f){
+			log.log( Level.SEVERE, "all-items.yml not found - starting from scratch...");
+		}
 		
 		setAllItemsInitialized(true); //should be before "addItem" to avoid endless loop
 		for (RssItem rssItem : tmpItems) {
