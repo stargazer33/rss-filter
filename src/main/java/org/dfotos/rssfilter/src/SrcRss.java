@@ -16,6 +16,7 @@
  */
 package org.dfotos.rssfilter.src;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.logging.Logger;
 import org.dfotos.rssfilter.RssItem;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
@@ -47,14 +49,8 @@ public class SrcRss extends AbstractSrc {
     @Override
     public final List<RssItem> doRead() throws Exception {
         LOG.log(Level.FINE, "begin");
+        SyndFeed feed = readTheFeed();
         List<RssItem> result = new ArrayList<RssItem>(50);
-        LOG.log(Level.INFO, "{0}, reading...", new Object[] { getName() });
-        URL feedUrl = new URL(url);
-        SyndFeedInput input = new SyndFeedInput();
-        SyndFeed feed = input.build(new XmlReader(feedUrl));
-        LOG.log(Level.INFO, "{0}, {1} RSS/ATOM items read", 
-                new Object[] {getName(), feed.getEntries().size() }
-                );
         int numNoDescr = 0;
         for (Object obj : feed.getEntries()) {
             SyndEntryImpl src = (SyndEntryImpl) obj;
@@ -80,5 +76,24 @@ public class SrcRss extends AbstractSrc {
         }
         LOG.log(Level.FINE, "end");
         return result;
+    }
+
+    /**
+     * Do all the preparations, read the URL, return it as SyndFeed.
+     * @return The SyndFeed object.
+     * @throws FeedException Something was wrong.
+     * @throws IOException Something was wrong.
+     */
+    private SyndFeed readTheFeed() 
+    throws FeedException, IOException 
+    {
+        LOG.log(Level.INFO, "{0}, reading...", new Object[] { getName() });
+        URL feedUrl = new URL(url);
+        SyndFeedInput input = new SyndFeedInput();
+        SyndFeed feed = input.build(new XmlReader(feedUrl));
+        LOG.log(Level.INFO, "{0}, {1} RSS/ATOM items read", 
+                new Object[] {getName(), feed.getEntries().size()}
+                );
+        return feed;
     }
 }
