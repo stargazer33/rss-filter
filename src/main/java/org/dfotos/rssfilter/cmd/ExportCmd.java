@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import org.dfotos.rssfilter.App;
 import org.dfotos.rssfilter.RssItem;
 import org.dfotos.rssfilter.exp.ExportFile;
+import org.dfotos.rssfilter.util.Utils;
 
 /**
  * Implementation of "export" command. It runs all configured exports. And
@@ -46,6 +47,7 @@ public final class ExportCmd implements CommandIntf {
         final List<ExportFile> exports = App.getConfig().getExportFiles();
         for (final ExportFile exportFile : exports) {
             final List<RssItem> toExport = new ArrayList<RssItem>(50);
+            Utils.sortItemsByDate(toExport, false);
             for (final RssItem rssItem : allItems) {
                 exportFile.exportItem(rssItem, toExport);
             }

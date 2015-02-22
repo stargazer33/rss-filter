@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.dfotos.rssfilter.RssItem;
-import org.dfotos.rssfilter.src.SrcBase;
+import org.dfotos.rssfilter.src.AbstractSrc;
 import org.dfotos.rssfilter.util.Utils;
 
 import com.google.gson.reflect.TypeToken;
@@ -19,7 +19,7 @@ import com.google.gson.reflect.TypeToken;
  *
  */
 public class SrcWorkinstartups 
-extends SrcBase 
+extends AbstractSrc 
 {
 
 	private static final Logger log = Logger.getLogger( SrcWorkinstartups.class.getName() );	

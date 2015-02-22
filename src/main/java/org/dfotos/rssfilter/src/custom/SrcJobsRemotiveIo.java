@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.dfotos.rssfilter.RssItem;
-import org.dfotos.rssfilter.src.SrcBase;
+import org.dfotos.rssfilter.src.AbstractSrc;
 import org.dfotos.rssfilter.util.Utils;
 
 import com.google.gson.reflect.TypeToken;
@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken;
  *
  */
 public class SrcJobsRemotiveIo 
-extends SrcBase {
+extends AbstractSrc {
 
 	private static final Logger log = Logger.getLogger( SrcJobsRemotiveIo.class.getName() );	
 
