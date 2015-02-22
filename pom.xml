@@ -140,6 +140,29 @@
         </executions>
       </plugin>
 
+      <plugin>
+        <groupId>com.qulice</groupId>
+        <artifactId>qulice-maven-plugin</artifactId>
+        <version>0.12.1</version>
+	<configuration>
+          <license>file:${basedir}/src/main/license-short.txt</license>
+            <!--
+          <excludes>
+            <exclude>checkstyle:/src/test/.*</exclude>
+	    <exclude>findbugs:/src/test/java/.*</exclude>
+            <exclude>pmd:/src/test/java/.*</exclude>
+          </excludes>
+	    -->
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+          </executions>
+      </plugin>
+
     </plugins>
 
   </build>
