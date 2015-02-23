@@ -1,3 +1,19 @@
+/**
+ * This file is part of Rss-filter.
+ *
+ * Rss-filter is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Rss-filter is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Rss-filter.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.dfotos.rssfilter.src.custom;
 
 import java.text.SimpleDateFormat;
@@ -8,23 +24,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.dfotos.rssfilter.RssItem;
 import org.dfotos.rssfilter.src.AbstractSrc;
 import org.dfotos.rssfilter.util.Utils;
-
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Site jobs.remotive.io as a data source 
- *
+ * Site jobs.remotive.io as a data source.
+ * @author stargazer33
+ * @version $Id$
  */
 public class SrcJobsRemotiveIo 
 extends AbstractSrc {
-
-	private static final Logger log = Logger.getLogger( SrcJobsRemotiveIo.class.getName() );	
-
-	Pattern patternScript = Pattern.compile("<script>window.RJ = (.+?)</script>");
+    /**
+     * Logger.
+     */
+	private static final Logger LOG = Logger.getLogger( SrcJobsRemotiveIo.class.getName() );	
+	
+	/**
+	 * Regexp used to find JSON in HTML.
+	 */
+	private static final Pattern patternScript = Pattern.compile("<script>window.RJ = (.+?)</script>");
 	
 	/**
 	 * read JSON data from jobs.remotive.io and convert to List<RssItem>  
@@ -33,7 +53,7 @@ extends AbstractSrc {
 	public List<RssItem> doRead() 
 	throws Exception
 	{
-    	log.log( Level.FINE, "begin");
+    	LOG.log( Level.FINE, "begin");
     	List<RssItem> result= new ArrayList<RssItem> (60);
     	
     	//get data from the site
@@ -47,7 +67,7 @@ extends AbstractSrc {
     		//log.log( Level.FINE,  tmp);
     	}
     	else{
-    		log.log( Level.SEVERE,  "No JSON found here: "+url);
+    		LOG.log( Level.SEVERE,  "No JSON found here: "+url);
     		return result;
     	}
     	
@@ -57,7 +77,7 @@ extends AbstractSrc {
 			tmp, 
 			new TypeToken<List<JsonItem>>(){}.getType() //provide the type info, JsonItem will be instantiated 
 		);
-    	log.log( Level.INFO, "{0}, {1} JSON items read", new Object[]{ getName(), listPojo.size()});
+    	LOG.log( Level.INFO, "{0}, {1} JSON items read", new Object[]{ getName(), listPojo.size()});
     	
 		//copy JsonItem -> RssItem
 		for (Object obj : listPojo) {
@@ -74,7 +94,7 @@ extends AbstractSrc {
 			rssItem.setUrl( jsonItem._url );			
 		}
 		
-		log.log( Level.FINE, "end");
+		LOG.log( Level.FINE, "end");
 		return result;
 		
 	}

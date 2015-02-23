@@ -1,3 +1,19 @@
+/**
+ * This file is part of Rss-filter.
+ *
+ * Rss-filter is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Rss-filter is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Rss-filter.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.dfotos.rssfilter.src.custom;
 
 import java.text.ParseException;
@@ -7,31 +23,29 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.dfotos.rssfilter.RssItem;
 import org.dfotos.rssfilter.src.AbstractSrc;
 import org.dfotos.rssfilter.util.Utils;
-
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Site workinstartups.com as a data source 
- *
+ * Site workinstartups.com as a data source. 
+ * @author stargazer33
+ * @version $Id$
  */
 public class SrcWorkinstartups 
 extends AbstractSrc 
 {
-
-	private static final Logger log = Logger.getLogger( SrcWorkinstartups.class.getName() );	
+    /**
+     * 
+     */
+	private static final Logger LOG = Logger.getLogger( SrcWorkinstartups.class.getName() );	
 	
-	/**
-	 * read JSON data from workinstartups.com and convert to List<RssItem>  
-	 */
 	@Override
 	public List<RssItem> doRead() 
 	throws Exception
 	{
-    	log.log( Level.FINE, "begin");
+    	LOG.log( Level.FINE, "begin");
     	List<RssItem> result= new ArrayList<RssItem> (60);
     	
     	//get data from the site
@@ -43,7 +57,7 @@ extends AbstractSrc
 			tmp.substring( 11, tmp.length() ), // cut the garbage in the first 11 chars! 
 			new TypeToken<List<JsonItem>>(){}.getType() //provide the type info, JsonItem will be instantiated 
 		);
-    	log.log( Level.INFO, "{0}, {1} JSON items read", new Object[]{ getName(), listPojo.size()});
+    	LOG.log( Level.INFO, "{0}, {1} JSON items read", new Object[]{ getName(), listPojo.size()});
 		
 		//copy JsonItem -> RssItem
 		for (Object obj : listPojo) {
@@ -60,7 +74,7 @@ extends AbstractSrc
 			rssItem.setUrl( jsonItem._url );			
 		}
 		
-		log.log( Level.FINE, "end");
+		LOG.log( Level.FINE, "end");
 		return result;
 	}
 
