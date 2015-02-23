@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import org.dfotos.rssfilter.exp.ExportFile;
 import org.dfotos.rssfilter.src.SrcIntf;
-import org.dfotos.rssfilter.tag.Tagger;
+import org.dfotos.rssfilter.tag.AbstractTagger;
 import org.dfotos.rssfilter.util.Utils;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
@@ -56,7 +56,7 @@ public final class Config {
     /**
      * List of taggers.
      */
-    private List<Tagger> taggers = new ArrayList<Tagger>();
+    private List<AbstractTagger> abstractTaggers = new ArrayList<AbstractTagger>();
 
     /**
      * Hidden constructor.
@@ -78,12 +78,12 @@ public final class Config {
     /**
      * @return List of taggers.
      */
-    public List<Tagger> getTaggers() {
-        return this.taggers;
+    public List<AbstractTagger> getTaggers() {
+        return this.abstractTaggers;
     }
 
-    public void setTaggers(final List<Tagger> tagg) {
-        this.taggers = tagg;
+    public void setTaggers(final List<AbstractTagger> tagg) {
+        this.abstractTaggers = tagg;
     }
     
     /**

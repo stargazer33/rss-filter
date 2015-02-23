@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.dfotos.rssfilter.App;
-import org.dfotos.rssfilter.tag.Tagger;
+import org.dfotos.rssfilter.tag.AbstractTagger;
 
 /**
  * The "tag" command. Runs all configured "taggers"
@@ -36,10 +36,10 @@ public class TagCmd implements CommandIntf {
     @Override
     public final void run(final List<String> args) throws Exception {
         LOG.log(Level.INFO, "begin");
-        final List<Tagger> allTaggers = App.getConfig().getTaggers();
-        for (final Tagger tagger : allTaggers) {
-            tagger.setData(App.getData());
-            tagger.assignTags();
+        final List<AbstractTagger> allTaggers = App.getConfig().getTaggers();
+        for (final AbstractTagger abstractTagger : allTaggers) {
+            abstractTagger.setData(App.getData());
+            abstractTagger.assignTags();
         }
         LOG.log(Level.INFO, "end");
     }
